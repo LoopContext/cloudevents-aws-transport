@@ -180,6 +180,7 @@ func (t *Transport) receiverLoop(ctx context.Context) (err error) {
 
 		if err := t.Receiver.Receive(context.TODO(), *event, nil); err != nil {
 			logger.Warnw("sqs receiver return err", zap.Error(err))
+			continue
 		}
 
 		_, err = t.Client.DeleteMessage(&_sqs.DeleteMessageInput{
