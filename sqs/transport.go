@@ -162,8 +162,6 @@ func (t *Transport) receiverLoop(ctx context.Context) (err error) {
 		}
 		body := []byte(*message.Body)
 
-		fmt.Println("message?", message)
-
 		// handle case when event is published using SNS topic
 		var snsMessage encoding.SNSMessage
 		err := json.Unmarshal(body, &snsMessage)
