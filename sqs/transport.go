@@ -2,7 +2,6 @@ package sqs
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/cloudevents/sdk-go/pkg/cloudevents"
@@ -160,17 +159,8 @@ func (t *Transport) receiverLoop(ctx context.Context) (err error) {
 		if message.Body == nil {
 			continue
 		}
-		body := []byte(*message.Body)
-
-		// handle case when event is published using SNS topic
-		var snsMessage encoding.SNSMessage
-		err := json.Unmarshal(body, &snsMessage)
-		if err == nil && snsMessage.IsNotification() {
-			body = []byte(snsMessage.Message)
-		}
-
 		msg := &encoding.Message{
-			Body: body,
+			Body: []byte(*message.Body),
 		}
 		event, err := t.codec.Decode(ctx, msg)
 		if err != nil {
@@ -178,7 +168,7 @@ func (t *Transport) receiverLoop(ctx context.Context) (err error) {
 			continue
 		}
 
-		if err := t.Receiver.Receive(context.TODO(), *event, nil); err != nil {
+		if err := t.Receiver.Receive(ctx, *event, nil); err != nil {
 			logger.Warnw("sqs receiver return err", zap.Error(err))
 			continue
 		}

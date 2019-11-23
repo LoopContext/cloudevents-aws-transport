@@ -2,9 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
-	"time"
 
 	cloudevents "github.com/cloudevents/sdk-go"
 	cloudeventsaws "github.com/jakubknejzlik/cloudevents-aws-transport"
@@ -16,9 +14,9 @@ func Receive(event cloudevents.Event) {
 }
 
 func main() {
-	// t, err := cloudeventsaws.NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/458470902217/sqs-queue-test")
+	t, err := cloudeventsaws.NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/770719141847/rdk-dev-orm-events")
 	// t, err := cloudeventsaws.NewSNSTransport("arn:aws:sns:eu-central-1:458470902217:test", cloudeventsaws.WithPort(8081))
-	t, err := cloudeventsaws.NewEventBridgeTransport("arn:aws:events:eu-central-1:458470902217:event-bus/test")
+	// t, err := cloudeventsaws.NewEventBridgeTransport("arn:aws:events:eu-central-1:458470902217:event-bus/test")
 	if err != nil {
 		log.Fatalf("failed to create client, %v", err)
 	}
@@ -27,17 +25,17 @@ func main() {
 		log.Fatalf("failed to create client, %v", err)
 	}
 
-	for i := 0; i < 1; i++ {
-		event := cloudevents.NewEvent()
-		event.SetID(fmt.Sprintf("test123 %d", i))
-		event.SetType("com.cloudevents.readme.sent")
-		event.SetSource("test")
-		event.SetTime(time.Now())
-		event.SetData(map[string]string{
-			"message": fmt.Sprintf("hello world %d", i),
-		})
-		log.Println(c.Send(context.Background(), event))
-	}
+	// for i := 0; i < 1; i++ {
+	// 	event := cloudevents.NewEvent()
+	// 	event.SetID(fmt.Sprintf("test123 %d", i))
+	// 	event.SetType("com.cloudevents.readme.sent")
+	// 	event.SetSource("test")
+	// 	event.SetTime(time.Now())
+	// 	event.SetData(map[string]string{
+	// 		"message": fmt.Sprintf("hello world %d", i),
+	// 	})
+	// 	log.Println(c.Send(context.Background(), event))
+	// }
 
-	// log.Fatal(c.StartReceiver(context.Background(), Receive))
+	log.Fatal(c.StartReceiver(context.Background(), Receive))
 }

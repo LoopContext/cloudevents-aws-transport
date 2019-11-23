@@ -44,6 +44,19 @@ func (c *Codec) Encode(ctx context.Context, e cloudevents.Event) (transport.Mess
 }
 
 func (c *Codec) Decode(ctx context.Context, msg transport.Message) (*cloudevents.Event, error) {
+	// unwrap SNS envelope if detected
+	if message, ok := DecodeSNSMessage(msg.(*Message).Body); ok {
+		msg = &Message{
+			Body: message.GetBody(),
+		}
+	}
+	// unwrap EventBridge envelope if detected (can be also wrapped in SNS envelope)
+	if message, ok := DecodeEventBridgeMessage(msg.(*Message).Body); ok {
+		msg = &Message{
+			Body: message.GetBody(),
+		}
+	}
+
 	switch c.inspectEncoding(ctx, msg) {
 	case Default:
 		fallthrough
