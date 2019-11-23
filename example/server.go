@@ -18,7 +18,7 @@ func Receive(event cloudevents.Event) {
 func main() {
 	// t, err := cloudeventsaws.NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/458470902217/sqs-queue-test")
 	// t, err := cloudeventsaws.NewSNSTransport("arn:aws:sns:eu-central-1:458470902217:test", cloudeventsaws.WithPort(8081))
-	t, err := cloudeventsaws.NewEventBridgeTransport("test")
+	t, err := cloudeventsaws.NewEventBridgeTransport("arn:aws:events:eu-central-1:458470902217:event-bus/test")
 	if err != nil {
 		log.Fatalf("failed to create client, %v", err)
 	}

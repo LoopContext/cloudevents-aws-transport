@@ -3,6 +3,7 @@ package eventbridge
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/cloudevents/sdk-go/pkg/cloudevents"
 	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
@@ -25,7 +26,7 @@ var _ transport.Transport = (*Transport)(nil)
 type Transport struct {
 	Encoding encoding.Encoding
 	Client   *_eventbridge.EventBridge
-	BusARN   string
+	BusName  string
 
 	Receiver transport.Receiver
 	// Converter is invoked if the incoming transport receives an undecodable
@@ -41,9 +42,12 @@ func New(busARN string, opts ...Option) (*Transport, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	arnParts := strings.Split(busARN, "/")
+
 	t := &Transport{
-		Client: _eventbridge.New(sess),
-		BusARN: busARN,
+		Client:  _eventbridge.New(sess),
+		BusName: arnParts[len(arnParts)-1],
 	}
 	if err := t.applyOptions(opts...); err != nil {
 		return nil, err
@@ -95,7 +99,7 @@ func (t *Transport) Send(ctx context.Context, event cloudevents.Event) (context.
 		input := _eventbridge.PutEventsInput{
 			Entries: []*_eventbridge.PutEventsRequestEntry{
 				&_eventbridge.PutEventsRequestEntry{
-					EventBusName: aws.String(t.BusARN),
+					EventBusName: aws.String(t.BusName),
 					Detail:       aws.String(string(m.Body)),
 					DetailType:   aws.String(event.Type()),
 					Source:       aws.String(event.Source()),
