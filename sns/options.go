@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jakubknejzlik/cloudevents-aws-transport/encoding"
+	"github.com/loopcontext/cloudevents-aws-transport/encoding"
 )
 
 // Option is the function signature required to be considered an nats.Option.

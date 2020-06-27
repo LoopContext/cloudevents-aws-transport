@@ -1,6 +1,6 @@
 package sqs
 
-import "github.com/jakubknejzlik/cloudevents-aws-transport/encoding"
+import "github.com/loopcontext/cloudevents-aws-transport/encoding"
 
 // Option is the function signature required to be considered an nats.Option.
 type Option func(*Transport) error

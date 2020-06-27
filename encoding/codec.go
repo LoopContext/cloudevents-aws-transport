@@ -8,6 +8,7 @@ import (
 	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
 )
 
+// Codec ...
 type Codec struct {
 	Encoding      Encoding
 	TransportName string
@@ -19,6 +20,7 @@ type Codec struct {
 
 var _ transport.Codec = (*Codec)(nil)
 
+// Encode ...
 func (c *Codec) Encode(ctx context.Context, e cloudevents.Event) (transport.Message, error) {
 	switch c.Encoding {
 	case Default:
@@ -43,6 +45,7 @@ func (c *Codec) Encode(ctx context.Context, e cloudevents.Event) (transport.Mess
 	}
 }
 
+// Decode ...
 func (c *Codec) Decode(ctx context.Context, msg transport.Message) (*cloudevents.Event, error) {
 	// unwrap SNS envelope if detected
 	if message, ok := DecodeSNSMessage(msg.(*Message).Body); ok {

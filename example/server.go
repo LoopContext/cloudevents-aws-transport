@@ -5,7 +5,7 @@ import (
 	"log"
 
 	cloudevents "github.com/cloudevents/sdk-go"
-	cloudeventsaws "github.com/jakubknejzlik/cloudevents-aws-transport"
+	cloudeventsaws "github.com/loopcontext/cloudevents-aws-transport"
 )
 
 func Receive(event cloudevents.Event) {

@@ -11,6 +11,8 @@ import (
 
 // CodecStructured represents an structured http transport codec for all versions.
 // Intended to be used as a base class.
+
+// CodecStructured ...
 type CodecStructured struct {
 	Encoding Encoding
 }

@@ -7,7 +7,7 @@ import (
 
 	"github.com/cloudevents/sdk-go/pkg/cloudevents"
 	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
-	"github.com/jakubknejzlik/cloudevents-aws-transport/encoding"
+	"github.com/loopcontext/cloudevents-aws-transport/encoding"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"

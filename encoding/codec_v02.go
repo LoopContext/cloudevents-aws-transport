@@ -8,6 +8,7 @@ import (
 	"github.com/cloudevents/sdk-go/pkg/cloudevents/transport"
 )
 
+// CodecV02 ...
 type CodecV02 struct {
 	CodecStructured
 
@@ -17,6 +18,7 @@ type CodecV02 struct {
 
 var _ transport.Codec = (*CodecV02)(nil)
 
+// Encode ...
 func (v CodecV02) Encode(ctx context.Context, e cloudevents.Event) (transport.Message, error) {
 	switch v.Encoding {
 	case Default:
@@ -28,6 +30,7 @@ func (v CodecV02) Encode(ctx context.Context, e cloudevents.Event) (transport.Me
 	}
 }
 
+// Decode ...
 func (v CodecV02) Decode(ctx context.Context, msg transport.Message) (*cloudevents.Event, error) {
 	// only structured is supported as of v0.2
 	switch v.inspectEncoding(ctx, msg) {

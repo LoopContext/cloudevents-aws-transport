@@ -1,9 +1,9 @@
 package cloudeventsaws
 
 import (
-	"github.com/jakubknejzlik/cloudevents-aws-transport/eventbridge"
-	"github.com/jakubknejzlik/cloudevents-aws-transport/sns"
-	"github.com/jakubknejzlik/cloudevents-aws-transport/sqs"
+	"github.com/loopcontext/cloudevents-aws-transport/eventbridge"
+	"github.com/loopcontext/cloudevents-aws-transport/sns"
+	"github.com/loopcontext/cloudevents-aws-transport/sqs"
 )
 
 var (

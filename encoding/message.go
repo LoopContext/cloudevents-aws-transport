@@ -9,10 +9,12 @@ import (
 // type check that this transport message impl matches the contract
 var _ transport.Message = (*Message)(nil)
 
+// Message ...
 type Message struct {
 	Body []byte
 }
 
+// CloudEventsVersion ...
 func (m Message) CloudEventsVersion() string {
 	raw := make(map[string]json.RawMessage)
 	if err := json.Unmarshal(m.Body, &raw); err != nil {
