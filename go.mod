@@ -1,4 +1,4 @@
-module github.com/loopcontext/cloudevents-aws-transport
+module github.com/LoopContext/cloudevents-aws-transport
 
 go 1.14
 
