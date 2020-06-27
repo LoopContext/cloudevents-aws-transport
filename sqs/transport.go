@@ -120,6 +120,11 @@ func (t *Transport) HasConverter() bool {
 	return t.Converter != nil
 }
 
+// HasTracePropagation implements Transport.HasTracePropagation
+func (t *Transport) HasTracePropagation() bool {
+	return false
+}
+
 // StartReceiver implements Transport.StartReceiver
 // NOTE: This is a blocking call.
 func (t *Transport) StartReceiver(ctx context.Context) (err error) {

@@ -129,6 +129,11 @@ func (t *Transport) HasConverter() bool {
 	return t.Converter != nil
 }
 
+// HasTracePropagation implements Transport.HasTracePropagation
+func (t *Transport) HasTracePropagation() bool {
+	return false
+}
+
 // StartReceiver implements Transport.StartReceiver
 func (t *Transport) StartReceiver(ctx context.Context) (err error) {
 	return fmt.Errorf("%s doesn't implement receiver", TransportName)
