@@ -17,7 +17,7 @@ import (
 
 const (
 	// TransportName is the name of this transport.
-	TransportName = "AWS SNS"
+	TransportName = "AWS SQS"
 )
 
 // Transport adheres to transport.Transport.
@@ -133,7 +133,7 @@ func (t *Transport) StartReceiver(ctx context.Context) (err error) {
 		return fmt.Errorf("failed to load coded")
 	}
 
-	fmt.Println("start receiver", t.QueueURL)
+	fmt.Println("start receiver: ", t.QueueURL)
 	for {
 		select {
 		case <-ctx.Done():

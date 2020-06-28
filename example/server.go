@@ -3,19 +3,22 @@ package main
 import (
 	"context"
 	"log"
+	// "fmt"
+	// "time"
 
 	cloudevents "github.com/cloudevents/sdk-go"
 	cloudeventsaws "github.com/loopcontext/cloudevents-aws-transport"
 )
 
+// Receive ..
 func Receive(event cloudevents.Event) {
 	log.Printf("? %v", event)
 	// do something with event.Context and event.Data (via event.DataAs(foo)
 }
 
 func main() {
-	t, err := cloudeventsaws.NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/770719141847/rdk-dev-orm-events")
-	// t, err := cloudeventsaws.NewSNSTransport("arn:aws:sns:eu-central-1:458470902217:test", cloudeventsaws.WithPort(8081))
+	t, err := cloudeventsaws.NewSQSTransport("https://sqs.us-east-2.amazonaws.com/381430815459/loopcontext-test")
+	// t, err := cloudeventsaws.NewSNSTransport("arn:aws:sqs:us-east-2:381430815459:loopcontext-test", cloudeventsaws.WithPort(8081))
 	// t, err := cloudeventsaws.NewEventBridgeTransport("arn:aws:events:eu-central-1:458470902217:event-bus/test")
 	if err != nil {
 		log.Fatalf("failed to create client, %v", err)
@@ -28,7 +31,7 @@ func main() {
 	// for i := 0; i < 1; i++ {
 	// 	event := cloudevents.NewEvent()
 	// 	event.SetID(fmt.Sprintf("test123 %d", i))
-	// 	event.SetType("com.cloudevents.readme.sent")
+	// 	event.SetType("com.loopcontext.readme.sent")
 	// 	event.SetSource("test")
 	// 	event.SetTime(time.Now())
 	// 	event.SetData(map[string]string{

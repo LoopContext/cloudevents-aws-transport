@@ -1,2 +1,2 @@
 run:
-	AWS_REGION=eu-central-1 go run example/server.go
+	AWS_REGION=us-east-2 go run example/server.go
