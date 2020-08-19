@@ -13,6 +13,7 @@ import (
 	"log"
 
 	cloudevents "github.com/cloudevents/sdk-go"
+	transport "github.com/jakubknejzlik/cloudevents-aws-transport"
 )
 
 func Receive(event cloudevents.Event) {
@@ -21,7 +22,7 @@ func Receive(event cloudevents.Event) {
 }
 
 func main() {
-	t, err := NewSNSTransport("arn:aws:sns:eu-central-1:123456789:test")
+	t, err := transport.NewSNSTransport("arn:aws:sns:eu-central-1:123456789:test")
 	if err != nil {
 		log.Fatalf("failed to create client, %v", err)
 	}
@@ -52,6 +53,7 @@ import (
 	"log"
 
 	cloudevents "github.com/cloudevents/sdk-go"
+	transport "github.com/jakubknejzlik/cloudevents-aws-transport"
 )
 
 func Receive(event cloudevents.Event) {
@@ -60,7 +62,7 @@ func Receive(event cloudevents.Event) {
 }
 
 func main() {
-	t, err := NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/123456789/sqs-queue-test")
+	t, err := transport.NewSQSTransport("https://sqs.eu-central-1.amazonaws.com/123456789/sqs-queue-test")
 	if err != nil {
 		log.Fatalf("failed to create transport, %v", err)
 	}
