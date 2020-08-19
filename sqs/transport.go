@@ -17,7 +17,7 @@ import (
 
 const (
 	// TransportName is the name of this transport.
-	TransportName = "AWS SNS"
+	TransportName = "AWS SQS"
 )
 
 // Transport adheres to transport.Transport.
